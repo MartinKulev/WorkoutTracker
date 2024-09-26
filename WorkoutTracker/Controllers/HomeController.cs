@@ -29,12 +29,17 @@ namespace WorkoutTracker.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult Workouts()
+        public IActionResult SplitHistory()
         {
             return View();
         }
 
-        public IActionResult CurrentWorkout()
+        public IActionResult CurrentSplit()
+        {
+            return View();
+        }
+
+        public IActionResult PastSplit()
         {
             return View();
         }

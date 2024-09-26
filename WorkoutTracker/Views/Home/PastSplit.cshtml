@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .split-day-box-container
+        {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .split-day-box {
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            margin: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border-radius: 5px;
+        }
+
+        .split-day-information {
+            margin: 0;
+        }
+
+        .workout-day {
+            width: 270px;
+            background-color: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            flex-direction: column;
+            margin: 10px;
+        }
+
+        .exercise {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin: 3px;
+        }
+
+        .exercise-weight {
+            width: 25px;
+            height: 15px;
+        }
+
+        .exercise-date {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <main class="main-container">
+        <section class="split-day-box-container">
+            <button class="split-day-box">
+                <p class="split-day-information">Push1</p>
+                <p class="split-day-information">(60)</p>
+            </button>
+            <button class="split-day-box">
+                <p class="split-day-information">Pull1</p>
+                <p class="split-day-information">(60)</p>
+            </button>
+            <button class="split-day-box">
+                <p class="split-day-information">Legs1</p>
+                <p class="split-day-information">(60)</p>
+            </button>
+            <button class="split-day-box">
+                <p class="split-day-information">Push1</p>
+                <p class="split-day-information">(60)</p>
+            </button>
+            <button class="split-day-box">
+                <p class="split-day-information">Pull1</p>
+                <p class="split-day-information">(60)</p>
+            </button>
+        </section>
+        <section>
+            <div class="workout-day">
+                <div class="exercise-date">26.09.24</div>
+                <div class="exercise">
+                    <div>exercise</div>
+                    <input class="exercise-weight" value="" />
+                </div>
+                <div class="exercise">
+                    <div>exercise</div>
+                    <input class="exercise-weight" value="" />
+                </div>
+                <div class="exercise">
+                    <div>exercise</div>
+                    <input class="exercise-weight" value="" />
+                </div>
+                <div class="exercise">
+                    <div>exercise</div>
+                    <input class="exercise-weight" value="" />
+                </div>
+                <div class="exercise">
+                    <div>exercise</div>
+                    <input class="exercise-weight" value="" />
+                </div>
+                <div class="exercise">
+                    <div>exercise</div>
+                    <input class="exercise-weight" value="" />
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        const buttons = document.querySelectorAll('.split-day-box');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function () {
+                buttons.forEach(btn => btn.style.backgroundColor = '');
+                this.style.backgroundColor = 'lightblue';
+            });
+        });
+    </script>
+</body>
+</html>

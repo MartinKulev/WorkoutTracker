@@ -7,18 +7,17 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            padding: 10px;
         }
 
-        .split-day-button-container
+        .split-day-box-container
         {
             display: flex;
             flex-direction: row;
         }
 
-        .split-day-button {
-            width: 60px;
-            height: 60px;
+        .split-day-box {
+            width: 50px;
+            height: 50px;
             background-color: white;
             margin: 5px;
             display: flex;
@@ -33,7 +32,7 @@
         }
 
         .workout-day {
-            width: 300px;
+            width: 270px;
             background-color: white;
             border-radius: 10px;
             display: flex;
@@ -57,61 +56,75 @@
             width: 25px;
             height: 15px;
         }
+
+        .exercise-date {
+            color: blue;
+        }
     </style>
 </head>
 <body>
     <main class="main-container">
-        <section class="split-day-button-container">
-            <button class="split-day-button">
+        <section class="split-day-box-container">
+            <button class="split-day-box">
                 <p class="split-day-information">Push1</p>
                 <p class="split-day-information">(60)</p>
             </button>
-            <button class="split-day-button">
+            <button class="split-day-box">
                 <p class="split-day-information">Pull1</p>
                 <p class="split-day-information">(60)</p>
             </button>
-            <button class="split-day-button">
+            <button class="split-day-box">
                 <p class="split-day-information">Legs1</p>
                 <p class="split-day-information">(60)</p>
             </button>
-            <button class="split-day-button">
+            <button class="split-day-box">
                 <p class="split-day-information">Push1</p>
                 <p class="split-day-information">(60)</p>
             </button>
-            <button class="split-day-button">
+            <button class="split-day-box">
                 <p class="split-day-information">Pull1</p>
                 <p class="split-day-information">(60)</p>
             </button>
         </section>
         <section>
             <div class="workout-day">
-                <div>26.09.24</div>
+                <div class="exercise-date">26.09.24</div>
                 <div class="exercise">
                     <div>exercise</div>
-                    <input class="exercise-weight" />
+                    <input class="exercise-weight" value=""/>
                 </div>
                 <div class="exercise">
                     <div>exercise</div>
-                    <input class="exercise-weight" />
+                    <input class="exercise-weight" value="" />
                 </div>
                 <div class="exercise">
                     <div>exercise</div>
-                    <input class="exercise-weight" />
+                    <input class="exercise-weight" value="" />
                 </div>
                 <div class="exercise">
                     <div>exercise</div>
-                    <input class="exercise-weight" />
+                    <input class="exercise-weight" value="" />
                 </div>
                 <div class="exercise">
                     <div>exercise</div>
-                    <input class="exercise-weight" />
+                    <input class="exercise-weight" value="" />
                 </div>
                 <div class="exercise">
                     <div>exercise</div>
-                    <input class="exercise-weight" />
+                    <input class="exercise-weight" value="" />
                 </div>
             </div>
         </section>
     </main>
+    <script>
+        const buttons = document.querySelectorAll('.split-day-box');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function () {
+                buttons.forEach(btn => btn.style.backgroundColor = '');
+                this.style.backgroundColor = 'lightblue';
+            });
+        });
+    </script>
 </body>
 </html>

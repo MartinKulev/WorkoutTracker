@@ -5,12 +5,10 @@
         .main-container {
             display: flex;
             justify-content: center;
-            padding: 10px;
         }
 
-        .white-box {
-            width: 300px;
-            height: 100px;
+        .split-box {
+            width: 280px;
             background-color: white;
             border-radius: 10px;
             display: flex;
@@ -21,38 +19,37 @@
             margin: 10px;
         }
 
-        .workout-title {
-
+        .split-title {
+            font-weight: bold;
+            margin-bottom: 30px;
         }
 
-        .workout-split {
-
-        }
-
-        .workout-date-week-container {
+        .split-date-week-container {
             width: 100%;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            margin-top: 30px;
         }
 
-        .workout-date {
-
-        }
-
-        .workout-week {
-
-        }
     </style>
 </head>
 <body>
     <main class="main-container">
-        <button class="white-box">
-            <div>Workout #1</div>
+        <button class="split-box">
+            <div class="split-title">Split #1</div>
             <div>Push • Pull • Legs • Push • Pull</div>
-            <div class="workout-date-week-container">
-                <div>11.09.22 - 29.07.24</div>
-                <div>Week 1 - Week 52</div>
+            <div class="split-date-week-container">
+                <div>
+                    <div>11.09.22</div>
+                    <div> - </div>
+                    <div>29.07.24</div>
+                </div>          
+                <div>
+                    <div>Week 1</div>
+                    <div> - </div>
+                    <div>Week 52</div>
+                </div>
             </div>
         </button>
     </main>

@@ -50,14 +50,16 @@
             align-items: center;
             text-decoration: none;
             color: white;
+            margin: 0;
+            padding: 0;
         }
     </style>
 </head>
 <body>
     <header>
         <nav class="nav-bar">
-            <a class="option-button" asp-action="CurrentWorkout" asp-controller="Home">Current Workout</a>
-            <a class="option-button" asp-action="Workouts" asp-controller="Home">Workouts</a>
+            <a class="option-button" asp-action="CurrentSplit" asp-controller="Home">Current Split</a>
+            <a class="option-button" asp-action="SplitHistory" asp-controller="Home">Split History</a>
         </nav>
     </header>
     @RenderBody()

@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .split-day-button-container
+        {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .split-day-button {
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            margin: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border-radius: 5px;
+        }
+
+        .split-day-information {
+            margin: 0;
+        }
+
+        .workout-day {
+            width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            flex-direction: column;
+            margin: 10px;
+        }
+
+        .exercise {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin: 3px;
+        }
+
+        .exercise-weight {
+            width: 25px;
+            height: 15px;
+        }
+    </style>
+</head>
+<body>
+    <main class="main-container">
+        <section class="split-day-button-container">
+            <button class="split-day-button">
+                <p class="split-day-information">Push1</p>
+                <p class="split-day-information">(60)</p>
+            </button>
+            <button class="split-day-button">
+                <p class="split-day-information">Pull1</p>
+                <p class="split-day-information">(60)</p>
+            </button>
+            <button class="split-day-button">
+                <p class="split-day-information">Legs1</p>
+                <p class="split-day-information">(60)</p>
+            </button>
+            <button class="split-day-button">
+                <p class="split-day-information">Push1</p>
+                <p class="split-day-information">(60)</p>
+            </button>
+            <button class="split-day-button">
+                <p class="split-day-information">Pull1</p>
+                <p class="split-day-information">(60)</p>
+            </button>
+        </section>
+        <section>
+            <div class="workout-day">
+                <div>26.09.24</div>
+                <div class="exercise">
+                    <div>exercise</div>
+                    <input class="exercise-weight" />
+                </div>
+                <div class="exercise">
+                    <div>exercise</div>
+                    <input class="exercise-weight" />
+                </div>
+                <div class="exercise">
+                    <div>exercise</div>
+                    <input class="exercise-weight" />
+                </div>
+                <div class="exercise">
+                    <div>exercise</div>
+                    <input class="exercise-weight" />
+                </div>
+                <div class="exercise">
+                    <div>exercise</div>
+                    <input class="exercise-weight" />
+                </div>
+                <div class="exercise">
+                    <div>exercise</div>
+                    <input class="exercise-weight" />
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

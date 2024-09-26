@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        button, input[type="button"], input[type="submit"] {
+            padding: 0;
+            margin: 0;
+            border: none;
+            background-color: transparent;
+            color: inherit;
+            cursor: pointer;
+            outline: none;
+            text-decoration: none;
+            font: inherit;
+        }
+
+        header {
+            width: 100%;
+        }
+
+        input {
+            border: 1px solid #999999;
+        }
+
+        body {
+            height: auto;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f7;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+        }
+
+        .nav-bar {
+            background: black;
+            height: 70px;
+            color: #ffffff;
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            margin: 0;
+        }
+
+        .option-button {
+            width: 50%;
+            border-right: 1px solid white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="nav-bar">
+            <a class="option-button" asp-action="CurrentWorkout" asp-controller="Home">Current Workout</a>
+            <a class="option-button" asp-action="Workouts" asp-controller="Home">Workouts</a>
+        </nav>
+    </header>
+    @RenderBody()
+</body>
+</html>

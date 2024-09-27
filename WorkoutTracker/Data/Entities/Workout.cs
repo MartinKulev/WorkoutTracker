@@ -1,4 +1,6 @@
-﻿namespace WorkoutTracker.Data.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace WorkoutTracker.Data.Entities
 {
     public class Workout
     {
@@ -6,6 +8,9 @@
 
         public DateTime DateWorkout { get; set; }
 
-        public string DayOfSplitId { get; set; }
-    }
+        [ForeignKey(nameof(DayOfSplitId))]
+        public int DayOfSplitId { get; set; }
+
+        public List<Exercise> Exercises { get; set; }
+    } 
 }

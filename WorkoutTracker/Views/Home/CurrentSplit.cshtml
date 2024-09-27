@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using WorkoutTracker.ViewModels
+@model CurrentSplitViewModel;
+<!DOCTYPE html>
 <html>
 <head>
     <style>
@@ -9,8 +11,7 @@
             flex-direction: column;
         }
 
-        .split-day-box-container
-        {
+        .split-day-box-container {
             display: flex;
             flex-direction: row;
         }
@@ -55,76 +56,70 @@
         .exercise-weight {
             width: 25px;
             height: 15px;
+            text-align: center;
+            padding-top: 3px;
         }
 
         .exercise-date {
             color: blue;
+        }
+
+        .add-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: blue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 30px;
+            margin: 5px;
+        }
+
+        .save-button {
+            width: 100px;
+            height: 30px;
+            background-color: blue;
+            color: white;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
     <main class="main-container">
         <section class="split-day-box-container">
-            <button class="split-day-box">
-                <p class="split-day-information">Push1</p>
-                <p class="split-day-information">(60)</p>
-            </button>
-            <button class="split-day-box">
-                <p class="split-day-information">Pull1</p>
-                <p class="split-day-information">(60)</p>
-            </button>
-            <button class="split-day-box">
-                <p class="split-day-information">Legs1</p>
-                <p class="split-day-information">(60)</p>
-            </button>
-            <button class="split-day-box">
-                <p class="split-day-information">Push1</p>
-                <p class="split-day-information">(60)</p>
-            </button>
-            <button class="split-day-box">
-                <p class="split-day-information">Pull1</p>
-                <p class="split-day-information">(60)</p>
-            </button>
+            @foreach (var dayOfSplit in Model.DayOfSplits)
+            {
+                <form class="split-day-box-container" asp-controller="Home" asp-action="CurrentSplit" asp-route-dayOfSplitName="@dayOfSplit.Name" method="get">
+                    <button class="split-day-box" type="submit" id="@dayOfSplit.Name">
+                        <p class="split-day-information">@dayOfSplit.Name</p>
+                        <p class="split-day-information">@dayOfSplit.WorkoutCount</p>
+                    </button>
+                </form>
+            }
         </section>
+        <section class="add-button">+</section>
         <section>
-            <div class="workout-day">
-                <div class="exercise-date">26.09.24</div>
-                <div class="exercise">
-                    <div>exercise</div>
-                    <input class="exercise-weight" value=""/>
+            @foreach (var workout in Model.DayOfSplits.First(p => p.Name == Model.DayOfSplitName).Workouts)
+            {
+                <div class="workout-day">
+                    <div class="exercise-date">@workout.DateWorkout.ToString("dd.MM.yyyy")</div>
+                    @foreach (var exercise in workout.Exercises)
+                    {
+                        <div class="exercise">
+                            <div>@exercise.Name</div>
+                            <input class="exercise-weight" value="@exercise.Weight" />
+                        </div>
+                    }
+                    <button class="save-button">Save</button>
                 </div>
-                <div class="exercise">
-                    <div>exercise</div>
-                    <input class="exercise-weight" value="" />
-                </div>
-                <div class="exercise">
-                    <div>exercise</div>
-                    <input class="exercise-weight" value="" />
-                </div>
-                <div class="exercise">
-                    <div>exercise</div>
-                    <input class="exercise-weight" value="" />
-                </div>
-                <div class="exercise">
-                    <div>exercise</div>
-                    <input class="exercise-weight" value="" />
-                </div>
-                <div class="exercise">
-                    <div>exercise</div>
-                    <input class="exercise-weight" value="" />
-                </div>
-            </div>
+            }
         </section>
     </main>
     <script>
-        const buttons = document.querySelectorAll('.split-day-box');
-
-        buttons.forEach(button => {
-            button.addEventListener('click', function () {
-                buttons.forEach(btn => btn.style.backgroundColor = '');
-                this.style.backgroundColor = 'lightblue';
-            });
-        });
+        let button = document.getElementById("@Model.DayOfSplitName")
+        button.style.backgroundColor = 'lightblue'
     </script>
 </body>
 </html>

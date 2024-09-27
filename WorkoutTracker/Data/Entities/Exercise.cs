@@ -1,4 +1,6 @@
-﻿namespace WorkoutTracker.Data.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace WorkoutTracker.Data.Entities
 {
     public class Exercise
     {
@@ -8,6 +10,7 @@
 
         public double Weight { get; set; }
 
+        [ForeignKey(nameof(Workout))]
         public int WorkoutId { get; set; }
     }
 }

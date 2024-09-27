@@ -1,9 +1,35 @@
+using Microsoft.EntityFrameworkCore;
+using WorkoutTracker.Data;
+using WorkoutTracker.Repositories.DaysOfSplit;
+using WorkoutTracker.Repositories.Exercises;
+using WorkoutTracker.Repositories.Splits;
+using WorkoutTracker.Repositories.Workouts;
+using WorkoutTracker.Services.DaysOfSplit;
+using WorkoutTracker.Services.Exercises;
+using WorkoutTracker.Services.Splits;
+using WorkoutTracker.Services.Workouts;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddDbContext<WorkoutTrackerDbContext>(options =>
+    options.UseMySQL(""));
+
+builder.Services.AddScoped<IDayOfSplitRepository, DayOfSplitRepository>();
+builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
+builder.Services.AddScoped<ISplitRepository, SplitRepository>();
+builder.Services.AddScoped<IWorkoutRepository, WorkoutRepository>();
+
+builder.Services.AddScoped<IDayOfSplitService, DayOfSplitService>();
+builder.Services.AddScoped<IExerciseService, ExerciseService>();
+builder.Services.AddScoped<ISplitService, SplitService>();
+builder.Services.AddScoped<IWorkoutService, WorkoutService>();
+
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -22,6 +48,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=CurrentSplit}/{id?}");
+    pattern: "{controller=Home}/{action=SplitHistory}/{id?}");
 
 app.Run();

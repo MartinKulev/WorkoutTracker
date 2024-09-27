@@ -1,10 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using WorkoutTracker.ViewModels
+@model SplitHistoryViewModel
+<!DOCTYPE html>
 <html>
 <head>
     <style>
         .main-container {
             display: flex;
-            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
 
         .split-box {
@@ -36,22 +39,25 @@
 </head>
 <body>
     <main class="main-container">
-        <button class="split-box">
-            <div class="split-title">Split #1</div>
-            <div>Push • Pull • Legs • Push • Pull</div>
-            <div class="split-date-week-container">
-                <div>
-                    <div>11.09.22</div>
-                    <div> - </div>
-                    <div>29.07.24</div>
-                </div>          
-                <div>
-                    <div>Week 1</div>
-                    <div> - </div>
-                    <div>Week 52</div>
+        @foreach (var split in Model.Splits)
+        {
+            <button class="split-box">
+                <div class="split-title">Split #@split.Id</div>
+                <div>@split.SplitToString</div>
+                <div class="split-date-week-container">
+                    <div>
+                        <div>@split.DateStart.ToString("dd.MM.yyyy")</div>
+                        <div> - </div>
+                        <div>@split.DateEnd.ToString("dd.MM.yyyy")</div>
+                    </div>
+                    <div>
+                        <div>Week @split.WeekStart</div>
+                        <div> - </div>
+                        <div>Week @split.WeekEnd</div>
+                    </div>
                 </div>
-            </div>
-        </button>
+            </button>
+        }
     </main>
 </body>
 </html>

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 using WorkoutTracker.Data.Entities;
 using WorkoutTracker.Repositories.DaysOfSplit;
 using WorkoutTracker.Repositories.Exercises;
@@ -69,6 +70,20 @@ namespace WorkoutTracker.Controllers
             //];
             //await _exerciseRepository.CreateRangeAsync(exercises);
 
+            //Workout workout = new Workout
+            //{
+            //    DateWorkout = new DateTime(2024, 11, 4),
+            //    DayOfSplitId = 1,
+            //    Exercises = exercises
+            //};
+            //await _workoutRepository.CreateAsync(workout);
+
+            //List<Workout> workouts = await _workoutRepository.GetAllWorkoutsByDayOfSplitId(1);
+            //Workout workout = workouts.First(p => p.DateWorkout == workouts.Max(p => p.DateWorkout));
+            //await _workoutRepository.DeleteAsync(workout);
+
+
+
             return View();
         }
 
@@ -83,20 +98,19 @@ namespace WorkoutTracker.Controllers
             return View(vm);
         }
 
-        [HttpGet("Home/CurrentSplit/{dayOfSplitName?}")]
-        public async Task<IActionResult> CurrentSplit(string? dayOfSplitName)
+        [HttpGet("Home/CurrentSplit/{dayOfSplitId?}")]
+        public async Task<IActionResult> CurrentSplit(int? dayOfSplitId)
         {
             List<DayOfSplit> daysOfSplit = await _dayOfSplitRepository.GetAllDaysOfSplitFromCurrentSplit();
-            
-            if(dayOfSplitName == null)
+            if (dayOfSplitId == null)
             {
-                dayOfSplitName = daysOfSplit.First(p => p.Id == daysOfSplit.Min(p => p.Id)).Name;
+                dayOfSplitId = daysOfSplit.First(p => p.Id == daysOfSplit.Min(p => p.Id)).Id;
             }
 
             CurrentSplitViewModel vm = new CurrentSplitViewModel
             {
                 DayOfSplits = daysOfSplit,
-                DayOfSplitName = dayOfSplitName
+                DayOfSplitId = (int)dayOfSplitId
             };
 
             return View(vm);
@@ -106,5 +120,30 @@ namespace WorkoutTracker.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddWorkoutToDayOfSplit(int dayOfSplitId)
+        {
+            await _workoutRepository.CreateWorkoutToDayOfSplit(dayOfSplitId);
+            return RedirectToAction("CurrentSplit", "Home", dayOfSplitId);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveChangesToWorkout(SaveWorkoutModel model)
+        {
+            Workout workout = await _workoutRepository.GetWorkoutById(model.WorkoutId);
+            List<Exercise> exercisesToBeUpdated = new List<Exercise>();
+
+            foreach (var exercise in model.Exercises)
+            {
+                var existingExercise = workout.Exercises.First(e => e.Id == exercise.Id);
+                existingExercise.Weight = exercise.Weight;
+                exercisesToBeUpdated.Add(existingExercise);
+            }
+
+            await _exerciseRepository.UpdateRangeAsync(exercisesToBeUpdated);
+            return RedirectToAction("CurrentSplit", "Home", workout.DayOfSplitId);
+        }
+
     }
 }

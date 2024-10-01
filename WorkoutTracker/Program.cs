@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<WorkoutTrackerDbContext>(options =>
-    options.UseMySQL(""));
+    options.UseMySQL("Server=mysql-210770ab-techstore.b.aivencloud.com;Database=workouttracker;Uid=avnadmin;Pwd=AVNS_ECNjUML_9rCSuGwr_PA;Port=15039"));
 
 builder.Services.AddScoped<IDayOfSplitRepository, DayOfSplitRepository>();
 builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();

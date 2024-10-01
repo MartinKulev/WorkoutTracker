@@ -6,11 +6,11 @@ namespace WorkoutTracker.Repositories.Exercises
 {
     public class ExerciseRepository : BaseRepository<Exercise>, IExerciseRepository
     {
-        private WorkoutTrackerDbContext context;
+        private WorkoutTrackerDbContext _context;
 
         public ExerciseRepository(WorkoutTrackerDbContext context) : base(context)
         {
-            this.context = context;
+            _context = context;
         }
     }
 }

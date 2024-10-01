@@ -6,6 +6,6 @@ namespace WorkoutTracker.ViewModels
     {
         public List<DayOfSplit> DayOfSplits { get; set; }
 
-        public string DayOfSplitName { get; set; }
+        public int DayOfSplitId { get; set; }
     }
 }

@@ -7,11 +7,11 @@ namespace WorkoutTracker.Repositories.Splits
 {
     public class SplitRepository : BaseRepository<Split>, ISplitRepository
     {
-        private WorkoutTrackerDbContext context;
+        private WorkoutTrackerDbContext _context;
 
         public SplitRepository(WorkoutTrackerDbContext context) : base(context)
         {
-            this.context = context;
+            _context = context;
         }
     }
 }

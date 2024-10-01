@@ -60,8 +60,12 @@
             padding-top: 3px;
         }
 
-        .exercise-date {
+        .workout-date {
             color: blue;
+            text-align: center;
+            width: 100px;
+            font-size: 16px;
+            margin-bottom: 10px;
         }
 
         .add-button {
@@ -83,6 +87,7 @@
             background-color: blue;
             color: white;
             border-radius: 5px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -91,34 +96,45 @@
         <section class="split-day-box-container">
             @foreach (var dayOfSplit in Model.DayOfSplits)
             {
-                <form class="split-day-box-container" asp-controller="Home" asp-action="CurrentSplit" asp-route-dayOfSplitName="@dayOfSplit.Name" method="get">
-                    <button class="split-day-box" type="submit" id="@dayOfSplit.Name">
+                <form class="split-day-box-container" asp-controller="Home" asp-action="CurrentSplit" asp-route-dayOfSplitId="@dayOfSplit.Id" method="get">
+                    <button class="split-day-box" type="submit" id="@dayOfSplit.Id">
                         <p class="split-day-information">@dayOfSplit.Name</p>
                         <p class="split-day-information">@dayOfSplit.WorkoutCount</p>
                     </button>
                 </form>
             }
         </section>
-        <section class="add-button">+</section>
         <section>
-            @foreach (var workout in Model.DayOfSplits.First(p => p.Name == Model.DayOfSplitName).Workouts)
+            <form asp-controller="Home" asp-action="AddWorkoutToDayOfSplit" method="post">
+                <input type="hidden" name="dayOfSplitId" value="@Model.DayOfSplitId" />
+                <button class="add-button" type="submit">+</button>
+            </form>
+        </section>
+        <section>
+            @foreach (var workout in Model.DayOfSplits.FirstOrDefault(p => p.Id == Model.DayOfSplitId).Workouts)
             {
-                <div class="workout-day">
-                    <div class="exercise-date">@workout.DateWorkout.ToString("dd.MM.yyyy")</div>
-                    @foreach (var exercise in workout.Exercises)
+                <form class="workout-day" asp-controller="Home" asp-action="SaveChangesToWorkout">
+                    <input type="hidden" name="WorkoutId" value="@workout.Id" />
+                    <input class="workout-date" name="DateWorkout" value="@workout.DateWorkout.ToString("dd.MM.yyyy")" />
+
+                    @for (int i = 0; i < workout.Exercises.Count; i++)
                     {
+                        var exercise = workout.Exercises[i];
                         <div class="exercise">
                             <div>@exercise.Name</div>
-                            <input class="exercise-weight" value="@exercise.Weight" />
+                            <input class="exercise-weight" name="Exercises[@i].Weight" value="@exercise.Weight" />
+                            <input type="hidden" name="Exercises[@i].Id" value="@exercise.Id" />
                         </div>
                     }
-                    <button class="save-button">Save</button>
-                </div>
+
+                    <button type="submit" class="save-button">Save</button>
+                </form>
             }
+
         </section>
     </main>
     <script>
-        let button = document.getElementById("@Model.DayOfSplitName")
+        let button = document.getElementById("@Model.DayOfSplitId")
         button.style.backgroundColor = 'lightblue'
     </script>
 </body>

@@ -6,5 +6,7 @@ namespace WorkoutTracker.Repositories.DaysOfSplit
     public interface IDayOfSplitRepository : IBaseRepository<DayOfSplit>
     {
         Task<List<DayOfSplit>> GetAllDaysOfSplitFromCurrentSplit();
+
+        Task<List<DayOfSplit>> GetAllDaysOfSplitBySplitId(int splitId);
     }
 }

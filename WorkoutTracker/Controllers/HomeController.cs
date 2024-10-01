@@ -116,9 +116,23 @@ namespace WorkoutTracker.Controllers
             return View(vm);
         }
 
-        public async Task<IActionResult> PastSplit()
+        [HttpGet("Home/PastSplit/{splitId}/{dayOfSplitId?}")]
+        public async Task<IActionResult> PastSplit(int splitId, int? dayOfSplitId)
         {
-            return View();
+            List<DayOfSplit> daysOfSplit = await _dayOfSplitRepository.GetAllDaysOfSplitBySplitId(splitId);
+
+            if (dayOfSplitId == null)
+            {
+                dayOfSplitId = daysOfSplit.First(p => p.Id == daysOfSplit.Min(p => p.Id)).Id;
+            }
+
+            CurrentSplitViewModel vm = new CurrentSplitViewModel
+            {
+                DayOfSplits = daysOfSplit,
+                DayOfSplitId = (int)dayOfSplitId
+            };
+
+            return View(vm);
         }
 
         [HttpPost]

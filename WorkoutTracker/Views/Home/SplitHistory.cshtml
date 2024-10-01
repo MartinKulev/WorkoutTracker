@@ -41,22 +41,24 @@
     <main class="main-container">
         @foreach (var split in Model.Splits)
         {
-            <button class="split-box">
-                <div class="split-title">Split #@split.Id</div>
-                <div>@split.SplitToString</div>
-                <div class="split-date-week-container">
-                    <div>
-                        <div>@split.DateStart.ToString("dd.MM.yyyy")</div>
-                        <div> - </div>
-                        <div>@split.DateEnd.ToString("dd.MM.yyyy")</div>
+            <form asp-controller="Home" asp-action="PastSplit" asp-route-splitId="@split.Id" method="get">
+                <button class="split-box">
+                    <div class="split-title">Split #@split.Id</div>
+                    <div>@split.SplitToString</div>
+                    <div class="split-date-week-container">
+                        <div>
+                            <div>@split.DateStart.ToString("dd.MM.yyyy")</div>
+                            <div> - </div>
+                            <div>@split.DateEnd.ToString("dd.MM.yyyy")</div>
+                        </div>
+                        <div>
+                            <div>Week @split.WeekStart</div>
+                            <div> - </div>
+                            <div>Week @split.WeekEnd</div>
+                        </div>
                     </div>
-                    <div>
-                        <div>Week @split.WeekStart</div>
-                        <div> - </div>
-                        <div>Week @split.WeekEnd</div>
-                    </div>
-                </div>
-            </button>
+                </button>
+            </form>
         }
     </main>
 </body>

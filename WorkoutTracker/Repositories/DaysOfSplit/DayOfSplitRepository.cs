@@ -34,5 +34,24 @@ namespace WorkoutTracker.Repositories.DaysOfSplit
 
             return daysOfSplit;
         }
+
+        public async Task<List<DayOfSplit>> GetAllDaysOfSplitBySplitId(int splitId)
+        {
+            List<DayOfSplit> daysOfSplit = await _context.DaysOfSplits
+                .Where(p => p.SplitId == splitId)
+                .Include(p => p.Workouts)
+                    .ThenInclude(p => p.Exercises)
+                .ToListAsync();
+
+            foreach (var dayOfSplit in daysOfSplit)
+            {
+                foreach (var workout in dayOfSplit.Workouts)
+                {
+                    workout.Exercises = workout.Exercises.OrderBy(e => e.Id).ToList();
+                }
+            }
+
+            return daysOfSplit;
+        }
     }
 }

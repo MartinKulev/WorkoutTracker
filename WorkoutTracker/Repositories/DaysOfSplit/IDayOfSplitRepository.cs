@@ -8,5 +8,7 @@ namespace WorkoutTracker.Repositories.DaysOfSplit
         Task<List<DayOfSplit>> GetAllDaysOfSplitFromCurrentSplit();
 
         Task<List<DayOfSplit>> GetAllDaysOfSplitBySplitId(int splitId);
+
+        Task<DayOfSplit> GetDayOfSplitById(int dayOfSplitId);
     }
 }

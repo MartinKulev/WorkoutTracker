@@ -99,7 +99,7 @@
                 <form class="split-day-box-container" asp-controller="Home" asp-action="CurrentSplit" asp-route-dayOfSplitId="@dayOfSplit.Id" method="get">
                     <button class="split-day-box" type="submit" id="@dayOfSplit.Id">
                         <p class="split-day-information">@dayOfSplit.Name</p>
-                        <p class="split-day-information">@dayOfSplit.WorkoutCount</p>
+                        <p class="split-day-information">(@dayOfSplit.WorkoutCount)</p>
                     </button>
                 </form>
             }

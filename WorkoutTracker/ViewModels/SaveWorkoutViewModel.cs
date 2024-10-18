@@ -4,7 +4,7 @@
     {
         public int WorkoutId { get; set; }
 
-        public string DateWorkout { get; set; }
+        public DateTime DateWorkout { get; set; }
 
         public List<ExerciseViewModel> Exercises { get; set; }
     }

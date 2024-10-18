@@ -53,5 +53,10 @@ namespace WorkoutTracker.Repositories.DaysOfSplit
 
             return daysOfSplit;
         }
+
+        public async Task<DayOfSplit> GetDayOfSplitById(int dayOfSplitId)
+        {
+            return _context.DaysOfSplits.First(p => p.Id == dayOfSplitId);
+        }
     }
 }

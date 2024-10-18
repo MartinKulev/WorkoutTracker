@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 using WorkoutTracker.Data;
 using WorkoutTracker.Repositories.DaysOfSplit;
 using WorkoutTracker.Repositories.Exercises;
@@ -29,7 +30,7 @@ builder.Services.AddScoped<IWorkoutService, WorkoutService>();
 
 
 var app = builder.Build();
-
+OpenBrowser("http://localhost:5000");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -51,3 +52,20 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=SplitHistory}/{id?}");
 
 app.Run();
+
+
+static void OpenBrowser(string url)
+{
+    try
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = url,
+            UseShellExecute = true // Use default browser
+        });
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Failed to open browser: {ex.Message}");
+    }
+}

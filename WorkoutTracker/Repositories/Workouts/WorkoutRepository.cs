@@ -24,7 +24,7 @@ namespace WorkoutTracker.Repositories.Workouts
             Workout workout = await _context.Workouts
                 .OrderByDescending(p => p.DateWorkout)
                 .Include(p => p.Exercises)
-                .FirstAsync();
+                .FirstAsync(p => p.DayOfSplitId == dayOfSplitId);
 
             Workout newWorkout = new Workout
             {

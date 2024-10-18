@@ -11,8 +11,8 @@ using WorkoutTracker.Data;
 namespace WorkoutTracker.Migrations
 {
     [DbContext(typeof(WorkoutTrackerDbContext))]
-    [Migration("20240927104528_DayOfSplitIdInt")]
-    partial class DayOfSplitIdInt
+    [Migration("20241002080300_Inital")]
+    partial class Inital
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,7 +35,7 @@ namespace WorkoutTracker.Migrations
                     b.Property<int>("SplitId")
                         .HasColumnType("int");
 
-                    b.Property<int>("WorkoutCount")
+                    b.Property<int>("WorkoutsCount")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -60,6 +60,8 @@ namespace WorkoutTracker.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("WorkoutId");
 
                     b.ToTable("Exercises");
                 });
@@ -105,7 +107,37 @@ namespace WorkoutTracker.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DayOfSplitId");
+
                     b.ToTable("Workouts");
+                });
+
+            modelBuilder.Entity("WorkoutTracker.Data.Entities.Exercise", b =>
+                {
+                    b.HasOne("WorkoutTracker.Data.Entities.Workout", null)
+                        .WithMany("Exercises")
+                        .HasForeignKey("WorkoutId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WorkoutTracker.Data.Entities.Workout", b =>
+                {
+                    b.HasOne("WorkoutTracker.Data.Entities.DayOfSplit", null)
+                        .WithMany("Workouts")
+                        .HasForeignKey("DayOfSplitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WorkoutTracker.Data.Entities.DayOfSplit", b =>
+                {
+                    b.Navigation("Workouts");
+                });
+
+            modelBuilder.Entity("WorkoutTracker.Data.Entities.Workout", b =>
+                {
+                    b.Navigation("Exercises");
                 });
 #pragma warning restore 612, 618
         }

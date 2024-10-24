@@ -94,7 +94,7 @@
 <body>
     <main class="main-container">
         <section class="split-day-box-container">
-            @foreach (var dayOfSplit in Model.DayOfSplits)
+            @foreach (var dayOfSplit in Model.DaysOfSplit)
             {
                 <form class="split-day-box-container" asp-controller="Home" asp-action="CurrentSplit" asp-route-dayOfSplitId="@dayOfSplit.Id" method="get">
                     <button class="split-day-box" type="submit" id="@dayOfSplit.Id">
@@ -111,7 +111,7 @@
             </form>
         </section>
         <section>
-            @foreach (var workout in Model.DayOfSplits.FirstOrDefault(p => p.Id == Model.DayOfSplitId).Workouts)
+            @foreach (var workout in Model.DaysOfSplit.FirstOrDefault(p => p.Id == Model.DayOfSplitId).Workouts.OrderByDescending(p => p.DateWorkout))
             {
                 <form class="workout-day" asp-controller="Home" asp-action="SaveChangesToWorkout">
                     <input type="hidden" name="WorkoutId" value="@workout.Id" />

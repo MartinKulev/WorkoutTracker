@@ -144,7 +144,7 @@ namespace WorkoutTracker.Controllers
 
             CurrentSplitViewModel vm = new CurrentSplitViewModel
             {
-                DayOfSplits = daysOfSplit,
+                DaysOfSplit = daysOfSplit,
                 DayOfSplitId = (int)dayOfSplitId
             };
 
@@ -163,7 +163,7 @@ namespace WorkoutTracker.Controllers
 
             CurrentSplitViewModel vm = new CurrentSplitViewModel
             {
-                DayOfSplits = daysOfSplit,
+                DaysOfSplit = daysOfSplit,
                 DayOfSplitId = (int)dayOfSplitId
             };
 

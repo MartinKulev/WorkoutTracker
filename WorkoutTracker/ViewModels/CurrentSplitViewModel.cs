@@ -4,7 +4,7 @@ namespace WorkoutTracker.ViewModels
 {
     public class CurrentSplitViewModel
     {
-        public List<DayOfSplit> DayOfSplits { get; set; }
+        public List<DayOfSplit> DaysOfSplit { get; set; }
 
         public int DayOfSplitId { get; set; }
     }

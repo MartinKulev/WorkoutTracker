@@ -15,8 +15,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<WorkoutTrackerDbContext>(options =>
-    options.UseMySQL("Server=mysql-210770ab-techstore.b.aivencloud.com;Database=workouttracker;Uid=avnadmin;Pwd=AVNS_ECNjUML_9rCSuGwr_PA;Port=15039"));
+builder.Configuration.AddJsonFile(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "GitSecrets.json"), optional: true);
+string? connectionString = builder.Configuration.GetConnectionString("WorkoutTracker") ?? builder.Configuration.GetConnectionString("DefaultConnection")!;
+
+builder.Services.AddDbContext<WorkoutTrackerDbContext>(options => options.UseMySQL(connectionString));
+
 
 builder.Services.AddScoped<IDayOfSplitRepository, DayOfSplitRepository>();
 builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
@@ -30,7 +33,7 @@ builder.Services.AddScoped<IWorkoutService, WorkoutService>();
 
 
 var app = builder.Build();
-OpenBrowser("http://localhost:5000");
+//OpenBrowser("http://localhost:5000");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

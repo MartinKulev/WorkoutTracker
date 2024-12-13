@@ -28,7 +28,7 @@ namespace WorkoutTracker.Repositories.Workouts
 
             Workout newWorkout = new Workout
             {
-                DateWorkout = DateTime.Now,
+                DateWorkout = DateTime.UtcNow,
                 DayOfSplitId = dayOfSplitId,
                 Exercises = new List<Exercise>() 
             };

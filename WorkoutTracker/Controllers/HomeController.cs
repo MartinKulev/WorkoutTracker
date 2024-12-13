@@ -1,14 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Globalization;
 using WorkoutTracker.Data.Entities;
 using WorkoutTracker.Repositories.DaysOfSplit;
 using WorkoutTracker.Repositories.Exercises;
 using WorkoutTracker.Repositories.Splits;
 using WorkoutTracker.Repositories.Workouts;
-using WorkoutTracker.Services.DaysOfSplit;
-using WorkoutTracker.Services.Exercises;
-using WorkoutTracker.Services.Splits;
-using WorkoutTracker.Services.Workouts;
 using WorkoutTracker.ViewModels;
 
 namespace WorkoutTracker.Controllers
@@ -31,91 +26,96 @@ namespace WorkoutTracker.Controllers
         public async Task<IActionResult> Index()
         {
             //Split split = new Split
-            //{ 
-            //    SplitToString = "Pull • Push • Legs • Pull • Push",
-            //    DateStart = new DateTime(2024, 07, 31),
-            //    DateEnd = DateTime.MinValue,
-            //    WeekStart = 52,
+            //{
+            //    SplitToString = "Push • Legs • Pull | Push • Legs • Pull",
+            //    DateStart = new DateTime(2025, 01, 07, 0, 0, 0, DateTimeKind.Utc),
+            //    DateEnd = DateTime.MinValue.ToUniversalTime(),
+            //    WeekStart = 64,
             //    WeekEnd = 0
             //};
             //await _splitRepository.CreateAsync(split);
 
             //List<DayOfSplit> daysOfSplit =
             //[
-            //    new DayOfSplit { Name = "Pull1", SplitId = 1, WorkoutCount = 60 },
-            //    new DayOfSplit { Name = "Push1", SplitId = 1, WorkoutCount = 60 },
-            //    new DayOfSplit { Name = "Legs", SplitId = 1, WorkoutCount = 60 },
-            //    new DayOfSplit { Name = "Pull2", SplitId = 1, WorkoutCount = 60 },
-            //    new DayOfSplit { Name = "Push2", SplitId = 1, WorkoutCount = 60 },
+            //    new DayOfSplit { Name = "Push1", SplitId = 1, WorkoutCount = 0 },
+            //    new DayOfSplit { Name = "Legs1", SplitId = 1, WorkoutCount = 0 },
+            //    new DayOfSplit { Name = "Pull1", SplitId = 1, WorkoutCount = 0 },
+            //    new DayOfSplit { Name = "Push2", SplitId = 1, WorkoutCount = 0 },
+            //    new DayOfSplit { Name = "Legs2", SplitId = 1, WorkoutCount = 0 },
+            //    new DayOfSplit { Name = "Pull2", SplitId = 1, WorkoutCount = 0 },
             //];
             //await _dayOfSplitRepository.CreateRangeAsync(daysOfSplit);
 
             //List<Exercise> exercises =
             //[
-            //    new Exercise { Name = "Lat pulldown", Weight = 50, WorkoutId = 1 },
-            //    new Exercise { Name = "Rowing machine", Weight = 00, WorkoutId = 1 },
-            //    new Exercise { Name = "Barbell shoulder shrugs", Weight = 60, WorkoutId = 1 },
-            //    new Exercise { Name = "Rear delt fly", Weight = 20, WorkoutId = 1 },
-            //    new Exercise { Name = "Dumbbell curls 1/2", Weight = 30, WorkoutId = 1 },
-            //    new Exercise { Name = "Wrist curls 1/2", Weight = 25, WorkoutId = 1 },
-            //    new Exercise { Name = "Neck curls 1/2", Weight = 12, WorkoutId = 1 },
-            //    new Exercise { Name = "Neck extensions 1/2", Weight = 7, WorkoutId = 1 },
+            //    new Exercise { Name = "One-hand cable bench press", Weight = 35, WorkoutId = 1 },
+            //    new Exercise { Name = "One-hand cable chest press", Weight = 30, WorkoutId = 1 },
+            //    new Exercise { Name = "Shoulder press machine", Weight = 40, WorkoutId = 1 },
+            //    new Exercise { Name = "Cable lateral raises", Weight = 15, WorkoutId = 1 },
+            //    new Exercise { Name = "One-hand triceps pushdowns", Weight = 25, WorkoutId = 1 },
+            //    new Exercise { Name = "Floor leg raises", Weight = 00, WorkoutId = 1 },
             //];
-            //await _exerciseRepository.CreateRangeAsync(exercises);
+
 
             //List<Exercise> exercises =
             //[
-            //    new Exercise { Name = "Bench press pr", Weight = 50, WorkoutId = 2 },
-            //    new Exercise { Name = "Cable chest fly", Weight = 00, WorkoutId = 2 },
-            //    new Exercise { Name = "Shoulder dumbbell press", Weight = 60, WorkoutId = 2 },
-            //    new Exercise { Name = "Dumbbell lateral raises", Weight = 20, WorkoutId = 2 },
-            //    new Exercise { Name = "Dumbbell curls 1/2", Weight = 30, WorkoutId = 2 },
-            //    new Exercise { Name = "Wrist curls 1/2", Weight = 25, WorkoutId = 2 },
-            //    new Exercise { Name = "Neck curls 1/2", Weight = 12, WorkoutId = 2 },
-            //    new Exercise { Name = "Neck extensions 1/2", Weight = 7, WorkoutId = 2 },
+            //    new Exercise { Name = "Hack squat", Weight = 30, WorkoutId = 2 },
+            //    new Exercise { Name = "Leg press bridge", Weight = 80, WorkoutId = 2 },
+            //    new Exercise { Name = "Leg extension", Weight = 45, WorkoutId = 2 },
+            //    new Exercise { Name = "Leg curl", Weight = 20, WorkoutId = 2 },
+            //    new Exercise { Name = "Cardio 50kcal", Weight = 50, WorkoutId = 2 },
+            //    new Exercise { Name = "Seated calf raises", Weight = 20, WorkoutId = 2 },
             //];
-            //await _exerciseRepository.CreateRangeAsync(exercises);
 
             //List<Exercise> exercises =
             //[
-            //    new Exercise { Name = "Hack squat", Weight = 30, WorkoutId = 3 },
-            //    new Exercise { Name = "Leg press", Weight = 60, WorkoutId = 3 },
-            //    new Exercise { Name = "Leg extension", Weight = 30, WorkoutId = 3 },
-            //    new Exercise { Name = "Leg curl", Weight = 20, WorkoutId = 3 },
-            //    new Exercise { Name = "Abductor machine in/out 1/2", Weight = 50, WorkoutId = 3 },
-            //    new Exercise { Name = "Abductor machine out/in 1/2", Weight = 45, WorkoutId = 3 },
-            //    new Exercise { Name = "Calf machine", Weight = 45, WorkoutId = 3 },
+            //    new Exercise { Name = "Lat pulldown", Weight = 50, WorkoutId = 3 },
+            //    new Exercise { Name = "One-hand cable row", Weight = 40, WorkoutId = 3 },
+            //    new Exercise { Name = "Barbell shoulder shrugs", Weight = 60, WorkoutId = 3 },
+            //    new Exercise { Name = "Rear delt fly", Weight = 20, WorkoutId = 3 },
+            //    new Exercise { Name = "Dumbbell curls 1/2", Weight = 25, WorkoutId = 3 },
+            //    new Exercise { Name = "Wrist curls 1/2", Weight = 25, WorkoutId = 3 },
+            //    new Exercise { Name = "Neck curls 1/2", Weight = 12, WorkoutId = 3 },
+            //    new Exercise { Name = "Neck extensions 1/2", Weight = 9, WorkoutId = 3 },
             //];
-            //await _exerciseRepository.CreateRangeAsync(exercises);
+
 
             //List<Exercise> exercises =
             //[
-            //    new Exercise { Name = "One-hand lat pulldown", Weight = 00, WorkoutId = 4 },
-            //    new Exercise { Name = "One-hand cable row", Weight = 00, WorkoutId = 4 },
-            //    new Exercise { Name = "Dumbbell shoulder shrugs", Weight = 45, WorkoutId = 4 },
-            //    new Exercise { Name = "Face Pulls", Weight = 18, WorkoutId = 4 },
-            //    new Exercise { Name = "Barbell curls 1/2", Weight = 30, WorkoutId = 4 },
-            //    new Exercise { Name = "Reverse curls 1/2", Weight = 15, WorkoutId = 4 },
-            //    new Exercise { Name = "Neck curls 1/2", Weight = 12, WorkoutId = 4 },
-            //    new Exercise { Name = "Neck extensions 1/2", Weight = 7, WorkoutId = 4},
+            //    new Exercise { Name = "Bench press pr", Weight = 70, WorkoutId = 4 },
+            //    new Exercise { Name = "Cable chest fly", Weight = 25, WorkoutId = 4 },
+            //    new Exercise { Name = "Shoulder dumbbell press", Weight = 30, WorkoutId = 4 },
+            //    new Exercise { Name = "Dumbbell lateral raises", Weight = 12, WorkoutId = 4 },
+            //    new Exercise { Name = "Overhead cable extension", Weight = 25, WorkoutId = 4 },
+            //    new Exercise { Name = "Upper abdominal machine", Weight = 30, WorkoutId = 4 },
             //];
-            //await _exerciseRepository.CreateRangeAsync(exercises);
 
             //List<Exercise> exercises =
             //[
-            //    new Exercise { Name = "One-hand cable chest press", Weight = 00, WorkoutId = 5 },
-            //    new Exercise { Name = "One-hand cable bench press", Weight = 20, WorkoutId = 5 },
-            //    new Exercise { Name = "Machine shoulder press", Weight = 20, WorkoutId = 5 },
-            //    new Exercise { Name = "Cable lateral raises", Weight = 15, WorkoutId = 5 },
-            //    new Exercise { Name = "One-hand triceps pushdowns", Weight = 20, WorkoutId = 5 },
-            //    new Exercise { Name = "Upper abdominal machine", Weight = 40, WorkoutId = 5 },
+            //    new Exercise { Name = "Bulgarian split squats", Weight = 00, WorkoutId = 5 },
+            //    new Exercise { Name = "Horizontal leg press", Weight = 80, WorkoutId = 5 },
+            //    new Exercise { Name = "Leg extension 2", Weight = 45, WorkoutId = 5 },
+            //    new Exercise { Name = "Leg curl 2", Weight = 20, WorkoutId = 5 },
+            //    new Exercise { Name = "Cardio 50kcal", Weight = 50, WorkoutId = 5 },
+            //    new Exercise { Name = "Standing calf raises", Weight = 20, WorkoutId = 5 },
             //];
-            //await _exerciseRepository.CreateRangeAsync(exercises);
+
+            //List<Exercise> exercises =
+            //[
+            //    new Exercise { Name = "One-hand lat pulldown", Weight = 50, WorkoutId = 6 },
+            //    new Exercise { Name = "Rowing machine", Weight = 60, WorkoutId = 6 },
+            //    new Exercise { Name = "Dumbbell shoulder shrugs", Weight = 50, WorkoutId = 6 },
+            //    new Exercise { Name = "Face Pulls", Weight = 22.5, WorkoutId = 6 },
+            //    new Exercise { Name = "Barbell curls 1/2", Weight = 30, WorkoutId = 6 },
+            //    new Exercise { Name = "Reverse ez barbell curls 1/2", Weight = 20, WorkoutId = 6 },
+            //    new Exercise { Name = "Neck curls 1/2", Weight = 12, WorkoutId = 6 },
+            //    new Exercise { Name = "Neck extensions 1/2", Weight = 9, WorkoutId = 6},
+            //];
 
             //Workout workout = new Workout
             //{
-            //    DateWorkout = new DateTime(2024, 7, 31),
-            //    DayOfSplitId = 5,
+            //    DateWorkout = new DateTime(2025, 01, 15, 0, 0, 0, DateTimeKind.Utc),
+            //    DayOfSplitId = 6,
             //    Exercises = exercises
             //};
             //await _workoutRepository.CreateAsync(workout);
@@ -193,11 +193,11 @@ namespace WorkoutTracker.Controllers
                 exercisesToBeUpdated.Add(existingExercise);
             }
 
-            workout.DateWorkout = model.DateWorkout;
+            workout.DateWorkout = new DateTime(model.DateWorkout.Year, model.DateWorkout.Month, model.DateWorkout.Day, 0, 0, 0, DateTimeKind.Utc);
 
             await _exerciseRepository.UpdateRangeAsync(exercisesToBeUpdated);
             await _workoutRepository.UpdateAsync(workout);
-            return RedirectToAction("CurrentSplit", "Home", workout.DayOfSplitId);
+            return RedirectToAction("CurrentSplit", "Home", new { dayOfSplitId = workout.DayOfSplitId });
         }
 
     }

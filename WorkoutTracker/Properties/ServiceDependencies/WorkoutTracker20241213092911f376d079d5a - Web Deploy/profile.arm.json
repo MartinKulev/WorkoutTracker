@@ -21,7 +21,7 @@
     },
     "resourceName": {
       "type": "string",
-      "defaultValue": "WorkoutTracker",
+      "defaultValue": "WorkoutTracker20241213092911f376d079d5a",
       "metadata": {
         "description": "Name of the main resource to be created by this template."
       }

@@ -18,18 +18,18 @@ builder.Services.AddControllersWithViews();
 builder.Configuration.AddJsonFile(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "GitSecrets.json"), optional: true);
 string? connectionString = builder.Configuration.GetConnectionString("WorkoutTracker") ?? builder.Configuration.GetConnectionString("DefaultConnection")!;
 
-builder.Services.AddDbContext<WorkoutTrackerDbContext>(options => options.UseMySQL(connectionString));
+builder.Services.AddDbContext<WorkoutTrackerDbContext>(options => options.UseNpgsql(connectionString));
 
 
-builder.Services.AddScoped<IDayOfSplitRepository, DayOfSplitRepository>();
-builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
-builder.Services.AddScoped<ISplitRepository, SplitRepository>();
-builder.Services.AddScoped<IWorkoutRepository, WorkoutRepository>();
+builder.Services.AddTransient<IDayOfSplitRepository, DayOfSplitRepository>();
+builder.Services.AddTransient<IExerciseRepository, ExerciseRepository>();
+builder.Services.AddTransient<ISplitRepository, SplitRepository>();
+builder.Services.AddTransient<IWorkoutRepository, WorkoutRepository>();
 
-builder.Services.AddScoped<IDayOfSplitService, DayOfSplitService>();
-builder.Services.AddScoped<IExerciseService, ExerciseService>();
-builder.Services.AddScoped<ISplitService, SplitService>();
-builder.Services.AddScoped<IWorkoutService, WorkoutService>();
+builder.Services.AddTransient<IDayOfSplitService, DayOfSplitService>();
+builder.Services.AddTransient<IExerciseService, ExerciseService>();
+builder.Services.AddTransient<ISplitService, SplitService>();
+builder.Services.AddTransient<IWorkoutService, WorkoutService>();
 
 
 var app = builder.Build();
@@ -52,23 +52,12 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=SplitHistory}/{id?}");
+    pattern: "{controller=Home}/{action=CurrentSplit}/{id?}");
+
+app.MapGet("/", context =>
+{
+    context.Response.Redirect("/Home/CurrentSplit");
+    return Task.CompletedTask;
+});
 
 app.Run();
-
-
-static void OpenBrowser(string url)
-{
-    try
-    {
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = url,
-            UseShellExecute = true // Use default browser
-        });
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Failed to open browser: {ex.Message}");
-    }
-}

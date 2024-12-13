@@ -17,22 +17,29 @@ namespace WorkoutTracker.Repositories.DaysOfSplit
 
         public async Task<List<DayOfSplit>> GetAllDaysOfSplitFromCurrentSplit()
         {
-            int currentSplitId = await _context.DaysOfSplits.MaxAsync(p => p.SplitId);
-            List<DayOfSplit> daysOfSplit = await _context.DaysOfSplits
-                .Where(p => p.SplitId == currentSplitId)
-                .Include(p => p.Workouts)
-                    .ThenInclude(p => p.Exercises)
-                .ToListAsync();
-
-            foreach (var dayOfSplit in daysOfSplit)
+            if(await _context.DaysOfSplits.AnyAsync())
             {
-                foreach (var workout in dayOfSplit.Workouts)
+                int currentSplitId = await _context.DaysOfSplits.MaxAsync(p => p.SplitId);
+                List<DayOfSplit> daysOfSplit = await _context.DaysOfSplits
+                    .Where(p => p.SplitId == currentSplitId)
+                    .Include(p => p.Workouts)
+                        .ThenInclude(p => p.Exercises)
+                    .ToListAsync();
+
+                foreach (var dayOfSplit in daysOfSplit)
                 {
-                    workout.Exercises = workout.Exercises.OrderBy(e => e.Id).ToList();
+                    foreach (var workout in dayOfSplit.Workouts)
+                    {
+                        workout.Exercises = workout.Exercises.OrderBy(e => e.Id).ToList();
+                    }
                 }
+                return daysOfSplit;
+            }
+            else
+            {
+                return new List<DayOfSplit>();
             }
 
-            return daysOfSplit;
         }
 
         public async Task<List<DayOfSplit>> GetAllDaysOfSplitBySplitId(int splitId)

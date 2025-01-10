@@ -139,7 +139,7 @@ namespace WorkoutTracker.Controllers
             List<DayOfSplit> daysOfSplit = await _dayOfSplitRepository.GetAllDaysOfSplitFromCurrentSplit();
             if (dayOfSplitId == null)
             {
-                dayOfSplitId = daysOfSplit.First(p => p.Id == daysOfSplit.Min(p => p.Id)).Id;
+                dayOfSplitId = daysOfSplit.OrderByDescending(p => p.WorkoutCount).ThenByDescending(p => p.Id).First().Id;
             }
 
             CurrentSplitViewModel vm = new CurrentSplitViewModel

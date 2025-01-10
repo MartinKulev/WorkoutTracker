@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Globalization;
 using WorkoutTracker.Data;
 using WorkoutTracker.Repositories.DaysOfSplit;
 using WorkoutTracker.Repositories.Exercises;
@@ -33,6 +34,16 @@ builder.Services.AddTransient<IWorkoutService, WorkoutService>();
 
 
 var app = builder.Build();
+
+var cultureInfo = new CultureInfo("en-GB"); // Use dd.MM.yyyy format
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+app.Use(async (context, next) =>
+{
+    CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+    CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+    await next();
+});
 //OpenBrowser("http://localhost:5000");
 
 // Configure the HTTP request pipeline.

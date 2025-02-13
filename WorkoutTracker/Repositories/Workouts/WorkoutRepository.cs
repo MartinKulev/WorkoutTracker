@@ -33,7 +33,7 @@ namespace WorkoutTracker.Repositories.Workouts
                 Exercises = new List<Exercise>() 
             };
 
-            foreach (var exercise in workout.Exercises)
+            foreach (var exercise in workout.Exercises.OrderBy(p => p.Id))
             {
                 var newExercise = new Exercise
                 {

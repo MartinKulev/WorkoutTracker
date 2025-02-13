@@ -23,7 +23,7 @@ namespace WorkoutTracker.Repositories.DaysOfSplit
                 List<DayOfSplit> daysOfSplit = await _context.DaysOfSplits
                     .Where(p => p.SplitId == currentSplitId)
                     .Include(p => p.Workouts)
-                        .ThenInclude(p => p.Exercises)
+                        .ThenInclude(p => p.Exercises).OrderBy(p => p.Id)
                     .ToListAsync();
 
                 foreach (var dayOfSplit in daysOfSplit)
